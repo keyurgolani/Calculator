@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <%
+  var title = title;
+  var result = result;
+  var error = error;
+  %>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script type="text/javascript">
+    	function restrictAlphabet(evt) {
+          var charCode = (evt.which) ? evt.which : evt.keyCode;
+          if (charCode != 46 && charCode > 31 
+            && (charCode < 48 || charCode > 57)) {
+            	return false;
+            } else {
+            	return true;
+            }
+        }
+        function fillValue(buttonValue,id) {
+        	if(id == 1) {
+        		document.getElementById('display1').value = document.getElementById('display1').value + buttonValue;
+        	} else if(id == 2) {
+        		document.getElementById('display2').value = document.getElementById('display2').value + buttonValue;
+        	}
+        	return false;
+       	}
+       	function clearValue(id) {
+       		if(id == 1) {
+       			document.getElementById('display1').value = "";
+       		} else if(id == 2) {
+       			document.getElementById('display2').value = "";
+       		}
+       		return false;
+       	}
+       	function processRequest(operation) {
+       	var myform = document.getElementById("myform");
+       		switch(operation) {
+       			case '+':
+       				myform.action = "/add";
+       				break;
+       			case '-':
+       				myform.action = "/subtract";
+       				break;
+       			case '*':
+       				myform.action = "/multiply";
+       				break;
+       			case '/':
+       				myform.action = "/divide";
+       				break;
+       			case '#':
+       				myform.action = "/";
+       				break;
+       			default:
+       				return false;
+       		}
+       		return true;
+       	}
+    </script>
+  </head>
+  <body>
+  <div>
+  	<fieldset align="center">
+    	<legend>Simple Calculator with Addition - Subtraction - Multiplication - Division</legend>
+    	<form action="/" method="get" id="myform">
+    		<div>
+	    		<table style="width: 100%">
+	    			<tr>
+	    				<td style="width: 35%;">
+	    					<div class="calcBody">
+					    		<input type="text" class="display" name="value1" id="display1" autofocus="autofocus" tabindex="1" placeholder="0" pattern="^[0-9A-Za-z.]*$" onkeypress="return restrictAlphabet(event)">
+								<div>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('1',1);">1</a>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('2',1);">2</a>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('3',1);">3</a>
+									
+								</div>
+								<div>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('4',1);">4</a>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('5',1);">5</a>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('6',1);">6</a>
+									
+								</div>
+								<div>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('7',1);">7</a>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('8',1);">8</a>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('9',1);">9</a>
+									
+								</div>
+								<div>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('0',1);">0</a>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('.',1);">.</a>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return clearValue(1)">C</a>
+								</div>
+					    	</div>
+	    				</td>
+	    				<td style="width: 30%;">
+	    					<div class="calcBody" style="width: 50%;">
+		    					<div>
+		    						<input type="submit" value="CC" class="btn btn-lg btn-primary mybutton" style="width: 63%" tabindex="7" onclick="return processRequest('#');">
+		    					</div>
+		    					<div>
+		    						<input type="submit" value="+" class="btn btn-lg btn-primary mybutton" tabindex="3" onclick="return processRequest('+');">
+						    		<input type="submit" value="-" class="btn btn-lg btn-primary mybutton" tabindex="4" onclick="return processRequest('-');">
+						    		<input type="submit" value="&times;" class="btn btn-lg btn-primary mybutton" tabindex="5" onclick="return processRequest('*');">
+						    		<input type="submit" value="&divide;" class="btn btn-lg btn-primary mybutton" tabindex="6" onclick="return processRequest('/');">
+		    					</div>
+					    	</div>
+	    				</td>
+	    				<td style="width: 35%;">
+					    	<div class="calcBody">
+					    		<input type="text" class="display" name="value2" id="display2" tabindex="2" placeholder="0" pattern="^[0-9A-Za-z.]*$" onkeypress="return restrictAlphabet(event)">
+								<div>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('1',2);">1</a>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('2',2);">2</a>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('3',2);">3</a>
+									
+								</div>
+								<div>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('4',2);">4</a>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('5',2);">5</a>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('6',2);">6</a>
+									
+								</div>
+								<div>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('7',2);">7</a>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('8',2);">8</a>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('9',2);">9</a>
+									
+								</div>
+								<div>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('0',2);">0</a>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('.',2);">.</a>
+									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return clearValue(2)">C</a>
+								</div>
+					    	</div>
+	    				</td>
+	    			</tr>
+	    			<tr>
+	    				<td colspan="3">
+	    					<div>
+	    						<fieldset>
+	    							<legend style="color: black; border-color: black;">Result</legend>
+	    							<p class="result"><%= result %></p>
+			    					<%
+			    					if(error) {
+			    						if(error == 1) { %>
+				    						<p class="errorField">Please enter values to perform operation</p>
+				    					<%} else if(error == 2) { %>
+				    						<p class="errorField">Please enter valid values to perform operation</p>
+				    					<%} else { %>
+				    						<p class="errorField">An error occurred. Please try again.</p>
+				    					<%}
+			    					}
+			    					%>
+	    						</fieldset>
+	    					</div>
+	    				</td>
+	    			</tr>
+	    		</table>
+	    	</div>
+    	</form>
+    </fieldset>
+  </div>
+  </body>
+</html>
