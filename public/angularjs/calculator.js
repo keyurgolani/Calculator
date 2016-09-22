@@ -6,7 +6,7 @@ calculator.controller('calculate', function($scope, $http) {
 			url : '/add',
 			data : {
 				"value1" : $scope.value1,
-				"value2" : $scope.value2,
+				"value2" : $scope.value2
 			}
 		}).success(function(data) {
 			$scope.result = data.result;
