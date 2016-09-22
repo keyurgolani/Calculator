@@ -1,168 +1,114 @@
 <!DOCTYPE html>
 <html>
   <head>
-  <%
-  var title = title;
-  var result = result;
-  var error = error;
-  %>
-    <title><%= title %></title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <title>Calculator</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script type="text/javascript">
-    	function restrictAlphabet(evt) {
-          var charCode = (evt.which) ? evt.which : evt.keyCode;
-          if (charCode != 46 && charCode > 31 
-            && (charCode < 48 || charCode > 57)) {
-            	return false;
-            } else {
-            	return true;
-            }
-        }
-        function fillValue(buttonValue,id) {
-        	if(id == 1) {
-        		document.getElementById('display1').value = document.getElementById('display1').value + buttonValue;
-        	} else if(id == 2) {
-        		document.getElementById('display2').value = document.getElementById('display2').value + buttonValue;
-        	}
-        	return false;
-       	}
-       	function clearValue(id) {
-       		if(id == 1) {
-       			document.getElementById('display1').value = "";
-       		} else if(id == 2) {
-       			document.getElementById('display2').value = "";
-       		}
-       		return false;
-       	}
-       	function processRequest(operation) {
-       	var myform = document.getElementById("myform");
-       		switch(operation) {
-       			case '+':
-       				myform.action = "/add";
-       				break;
-       			case '-':
-       				myform.action = "/subtract";
-       				break;
-       			case '*':
-       				myform.action = "/multiply";
-       				break;
-       			case '/':
-       				myform.action = "/divide";
-       				break;
-       			case '#':
-       				myform.action = "/";
-       				break;
-       			default:
-       				return false;
-       		}
-       		return true;
-       	}
-    </script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="angularjs/calculator.js"></script>
   </head>
-  <body>
-  <div>
-  	<fieldset align="center">
-    	<legend>Simple Calculator with Addition - Subtraction - Multiplication - Division</legend>
-    	<form action="/" method="get" id="myform">
-    		<div>
-	    		<table style="width: 100%">
-	    			<tr>
-	    				<td style="width: 35%;">
-	    					<div class="calcBody">
-					    		<input type="text" class="display" name="value1" id="display1" autofocus="autofocus" tabindex="1" placeholder="0" pattern="^[0-9A-Za-z.]*$" onkeypress="return restrictAlphabet(event)">
-								<div>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('1',1);">1</a>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('2',1);">2</a>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('3',1);">3</a>
-									
+  <body ng-app="calculator" ng-controller="calculate" class="body">
+  	<div class="container">
+  		<div class="row">
+  			<div class="col-md-12">
+  				<div class="row">
+  					<div class="container-fluid h1 title">
+	  					Simple Calculator with Addition - Subtraction - Multiplication - Division
+	  				</div>
+  				</div>
+		  		<div class="row">
+		  			<div class="col-md-4">
+		  				<div class="row">
+			  				<div class="calcBody">
+					    		<input type="text" class="display" name="value1" ng-model="value1" id="display1" autofocus="autofocus" tabindex="1" placeholder="0">
+					    		<div align="center">
+									<button class="btn btn-lg btn-primary mybutton" ng-click="toggle(1);">&plusmn;</button>	
 								</div>
 								<div>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('4',1);">4</a>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('5',1);">5</a>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('6',1);">6</a>
-									
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('1',1);">1</button>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('2',1);">2</button>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('3',1);">3</button>	
 								</div>
 								<div>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('7',1);">7</a>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('8',1);">8</a>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('9',1);">9</a>
-									
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('4',1);">4</button>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('5',1);">5</button>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('6',1);">6</button>
 								</div>
 								<div>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('0',1);">0</a>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('.',1);">.</a>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return clearValue(1)">C</a>
-								</div>
-					    	</div>
-	    				</td>
-	    				<td style="width: 30%;">
-	    					<div class="calcBody" style="width: 50%;display:block;">
-		    					<div>
-		    						<input type="submit" value="CC" class="btn btn-lg btn-primary mybutton" style="width: 63%" tabindex="7" onclick="return processRequest('#');">
-		    					</div>
-		    					<div>
-		    						<input type="submit" value="+" class="btn btn-lg btn-primary mybutton" tabindex="3" onclick="return processRequest('+');">
-						    		<input type="submit" value="-" class="btn btn-lg btn-primary mybutton" tabindex="4" onclick="return processRequest('-');">
-						    		<input type="submit" value="&times;" class="btn btn-lg btn-primary mybutton" tabindex="5" onclick="return processRequest('*');">
-						    		<input type="submit" value="&divide;" class="btn btn-lg btn-primary mybutton" tabindex="6" onclick="return processRequest('/');">
-		    					</div>
-					    	</div>
-	    				</td>
-	    				<td style="width: 35%;">
-					    	<div class="calcBody">
-					    		<input type="text" class="display" name="value2" id="display2" tabindex="2" placeholder="0" pattern="^[0-9A-Za-z.]*$" onkeypress="return restrictAlphabet(event)">
-								<div>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('1',2);">1</a>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('2',2);">2</a>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('3',2);">3</a>
-									
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('7',1);">7</button>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('8',1);">8</button>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('9',1);">9</button>
 								</div>
 								<div>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('4',2);">4</a>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('5',2);">5</a>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('6',2);">6</a>
-									
-								</div>
-								<div>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('7',2);">7</a>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('8',2);">8</a>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('9',2);">9</a>
-									
-								</div>
-								<div>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('0',2);">0</a>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return fillValue('.',2);">.</a>
-									<a href="" class="btn btn-lg btn-primary mybutton" onclick="return clearValue(2)">C</a>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('0',1);">0</button>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('.',1);">.</button>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="clearValue(1)">C</button>
 								</div>
 					    	</div>
-	    				</td>
-	    			</tr>
-	    			<tr>
-	    				<td colspan="3">
-	    					<div>
-	    						<fieldset>
-	    							<legend style="color: black; border-color: black;">Result</legend>
-	    							<p class="result"><%= result %></p>
-			    					<%
-			    					if(error) {
-			    						if(error == 1) { %>
-				    						<p class="errorField">Please enter values to perform operation</p>
-				    					<%} else if(error == 2) { %>
-				    						<p class="errorField">Please enter valid values to perform operation</p>
-				    					<%} else { %>
-				    						<p class="errorField">An error occurred. Please try again.</p>
-				    					<%}
-			    					}
-			    					%>
-	    						</fieldset>
-	    					</div>
-	    				</td>
-	    			</tr>
-	    		</table>
-	    	</div>
-    	</form>
-    </fieldset>
-  </div>
+		  				</div>
+		  			</div>
+		  			<div class="col-md-4">
+		  				<div class="row">
+		  					<div class="calcBody controls" align="center">
+								<div>
+									<input type="submit" value="CC" class="btn btn-lg btn-primary mybutton" style="width: 63%" ng-click="clearValue(3);" tabindex="7">
+								</div>
+								<div>
+									<input type="button" value="+" ng-model="operation" class="btn btn-lg btn-primary mybutton" tabindex="3" ng-click="add();">
+					    			<input type="button" value="-" ng-model="operation" class="btn btn-lg btn-primary mybutton" tabindex="4" ng-click="sub();">
+					    			<input type="button" value="&times;" ng-model="operation" class="btn btn-lg btn-primary mybutton" tabindex="5" ng-click="mul();">
+					    			<input type="button" value="&divide;" ng-model="operation" class="btn btn-lg btn-primary mybutton" tabindex="6" ng-click="div();">
+								</div>
+				    		</div>
+		  				</div>
+		  			</div>
+		  			<div class="col-md-4">
+			  			<div class="row">
+		  					<div class="calcBody">
+					    		<input type="text" class="display" name="value2" id="display2" tabindex="2" ng-model="value2" placeholder="0">
+					    		<div align="center">
+									<button class="btn btn-lg btn-primary mybutton" ng-click="toggle(2);">&plusmn;</button>	
+								</div>
+								<div>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('1',2);">1</button>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('2',2);">2</button>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('3',2);">3</button>	
+								</div>
+								<div>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('4',2);">4</button>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('5',2);">5</button>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('6',2);">6</button>								
+								</div>
+								<div>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('7',2);">7</button>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('8',2);">8</button>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('9',2);">9</button>								
+								</div>
+								<div>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('0',2);">0</button>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="fillValue('.',2);">.</button>
+									<button class="btn btn-lg btn-primary mybutton" ng-click="clearValue(2)">C</button>
+								</div>
+			    			</div>
+		  				</div>
+		  			</div>
+		  		</div>
+		  		<div class="row result">
+		  			<div class="col-xs-12 h2 text-center">
+		  				<strong>Result</strong>
+		  			</div>
+		  		</div>
+		  		<div class="row answer">
+		  			<div class="col-xs-12 h1 text-center">
+		  				{{result}}
+		  			</div>
+		  		</div>
+		  	</div>
+		</div>
+	</div>
   </body>
 </html>

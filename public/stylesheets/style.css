@@ -1,21 +1,29 @@
-body {
+.body {
   background-color: #FF5733;
 }
 
-legend {
-	font-size: 300%;
-	font-family: fantasy;
-	color: white;
+.title {
+	text-align: center;
+	font-size: 200%;
+	font-weight: bold;
 	border-bottom: 5px solid white;
+	padding-bottom: 20px;
 }
 
 .calcBody {
-	width: 60%;
+	width: 70%;
 	height: 35%;
 	background-color: #DAF7A6;
 	padding: 3%;
 	margin: auto;
 	border-radius: 15px;
+}
+
+.controls {
+	width: 60%;
+	display:block;
+	margin: 15% auto;
+	padding: 6%;
 }
 
 .display {
@@ -25,7 +33,7 @@ legend {
 	border-radius: 15px;
 	font-size: 300%;
 	text-align: right;
-	margin-bottom: 15%;
+	margin-bottom: 5%;
 	margin-top: 10%;
 	padding-right: 10px;
 }
@@ -36,17 +44,8 @@ legend {
 	width: 30%;
 }
 
-.mylargebutton {
-	margin: 6%;
-	height: 20%;
-	width: 88%;
-}
-
 .result {
-	font-size: 400%;
-	color: black;
-	font-weight: bold;
-	font-family: sans-serif;
+	border-bottom: 5px solid black;
 }
 
 .errorField {
