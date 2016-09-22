@@ -75,9 +75,10 @@ router.post('/multiply', function(req, res, next) {
 
 router.post('/divide', function(req, res, next) {
 	validateInput(req,res,function(value1,value2,valid) {
+		console.log(value1 / value2);
 		if(valid) {
 			res.send({
-				"result": (value1 / value2 == Infinity ? "Infinity" : value1 / value2)
+				"result": (value1 / value2 == Infinity ? "Infinity" : value1 / value2 == -Infinity ? "-Infinity" : value1 / value2)
 			});
 		}
 	});
