@@ -11,7 +11,7 @@ calculator.controller('calculate', function($scope, $http) {
 		}).success(function(data) {
 			$scope.result = data.result;
 		}).error(function(error) {
-			// Send Error To Front
+			//TODO: Send Error To Front
 		});
 	};
 	
@@ -26,7 +26,7 @@ calculator.controller('calculate', function($scope, $http) {
 		}).success(function(data) {
 			$scope.result = data.result;
 		}).error(function(error) {
-			// Send Error To Front
+			//TODO: Send Error To Front
 		});
 	};
 	
@@ -41,7 +41,7 @@ calculator.controller('calculate', function($scope, $http) {
 		}).success(function(data) {
 			$scope.result = data.result;
 		}).error(function(error) {
-			// Send Error To Front
+			//TODO: Send Error To Front
 		});
 	};
 	
@@ -57,7 +57,7 @@ calculator.controller('calculate', function($scope, $http) {
 			console.log(data.result);
 			$scope.result = data.result;
 		}).error(function(error) {
-			// Send Error To Front
+			//TODO: Send Error To Front
 		});
 	};
 	

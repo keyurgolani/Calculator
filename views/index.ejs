@@ -102,9 +102,14 @@
 		  				<strong>Result</strong>
 		  			</div>
 		  		</div>
-		  		<div class="row answer">
+		  		<div ng-hide="isError" class="row answer">
 		  			<div class="col-xs-12 h1 text-center">
 		  				{{result}}
+		  			</div>
+		  		</div>
+		  		<div ng-show="isError" class="row errorField">
+		  			<div class="col-xs-12 h1 text-center">
+		  				{{errorMessage}}
 		  			</div>
 		  		</div>
 		  	</div>
