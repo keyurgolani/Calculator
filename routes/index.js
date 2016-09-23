@@ -2,6 +2,11 @@ var express = require('express');
 var router = express.Router();
 var logger = require("../utils/logger");
 
+// MySQL Connection Pooling References
+// https://github.com/coopernurse/node-pool
+// http://stackoverflow.com/questions/18496540/node-js-mysql-connection-pooling
+// https://codeforgeek.com/2015/01/nodejs-mysql-tutorial/
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', {  });
