@@ -1,6 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var logger = require("../utils/logger");
+var soap = require('soap');
+var baseURL = "http://localhost:8080/CalculatorWebServices/services/";
+var option = {
+	ignoredNamespaces : true
+};
 
 // MySQL Connection Pooling References
 // https://github.com/coopernurse/node-pool
@@ -26,7 +31,7 @@ function validateInput(req,res,callback) {
 	value1 = Number(value1);
 	value2 = Number(value2);
 	if(isNaN(value1) || isNaN(value2)) {
-		//TODO: Send error message here.
+		// TODO: Send error message here.
 		valid = false;
 	}
 	logger.log('info', 'Validated values ' + value1 + ' and ' + value2);
@@ -39,8 +44,22 @@ router.post('/add', function(req, res, next) {
 	validateInput(req,res,function(value1,value2,valid) {
 		if(valid) {
 			logger.log('info', 'Adding values');
-			res.send({
-				"result": (value1 + value2)
+			var url = baseURL + "CalculationServices?wsdl";
+			soap.createClient(url, option, function(err, client) {
+				client.add({
+					value1 : value1,
+					value2 : value2
+				}, function(error, result) {
+					if(error) {
+						res.send({
+							result : "Error"
+						});
+					} else {
+						res.send({
+							result : result.addReturn
+						});
+					}
+				});
 			});
 		}
 	});
@@ -50,8 +69,22 @@ router.post('/subtract', function(req, res, next) {
 	validateInput(req,res,function(value1,value2,valid) {
 		if(valid) {
 			logger.log('info', 'Subtracting values');
-			res.send({
-				"result": (value1 - value2)
+			var url = baseURL + "CalculationServices?wsdl";
+			soap.createClient(url, option, function(err, client) {
+				client.subtract({
+					value1 : value1,
+					value2 : value2
+				}, function(error, result) {
+					if(error) {
+						res.send({
+							result : "Error"
+						});
+					} else {
+						res.send({
+							result : result.subtractReturn
+						});
+					}
+				});
 			});
 		}
 	});
@@ -61,8 +94,22 @@ router.post('/multiply', function(req, res, next) {
 	validateInput(req,res,function(value1,value2,valid) {
 		if(valid) {
 			logger.log('info', 'Multiplying values');
-			res.send({
-				"result": (value1 * value2)
+			var url = baseURL + "CalculationServices?wsdl";
+			soap.createClient(url, option, function(err, client) {
+				client.multiply({
+					value1 : value1,
+					value2 : value2
+				}, function(error, result) {
+					if(error) {
+						res.send({
+							result : "Error"
+						});
+					} else {
+						res.send({
+							result : result.multiplyReturn
+						});
+					}
+				});
 			});
 		}
 	});
@@ -72,9 +119,29 @@ router.post('/divide', function(req, res, next) {
 	validateInput(req,res,function(value1,value2,valid) {
 		logger.log('info', 'Dividing values');
 		if(valid) {
-			res.send({
-				"result": (value1 / value2 == Infinity ? "Infinity" : value1 / value2 == -Infinity ? "-Infinity" : value1 / value2)
-			});
+			if(value2 == 0) {
+				res.send({
+					"result": "Infinity"
+				});
+			} else {
+				var url = baseURL + "CalculationServices?wsdl";
+				soap.createClient(url, option, function(err, client) {
+					client.divide({
+						value1 : value1,
+						value2 : value2
+					}, function(error, result) {
+						if(error) {
+							res.send({
+								result : "Error"
+							});
+						} else {
+							res.send({
+								result : result.divideReturn
+							});
+						}
+					});
+				});
+			}
 		}
 	});
 });
