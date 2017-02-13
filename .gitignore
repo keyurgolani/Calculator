@@ -69,7 +69,6 @@ jspm_packages
 ### Eclipse ###
 
 .metadata
-bin/
 tmp/
 *.tmp
 *.bak
