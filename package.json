@@ -6,14 +6,18 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "angularjs": "0.0.1",
     "body-parser": "~1.15.1",
+    "bootstrap": "^3.3.7",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "ejs": "~2.4.1",
     "express": "~4.13.4",
+    "jquery": "^3.1.1",
+    "jquery-ui": "^1.12.1",
     "morgan": "~1.7.0",
-    "serve-favicon": "~2.3.0",
     "nodemon": "1.10.2",
+    "serve-favicon": "~2.3.0",
     "winston": "2.2.0"
   }
 }
